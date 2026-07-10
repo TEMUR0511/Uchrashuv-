@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxsus Taklif ✨</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <!-- Orqa fondagi harakatlanuvchi iqtiboslar -->
+    <div class="bg-quotes">
+        <span class="quote q1">Sengacha yillarim bu zerikarli yillar, seni izlab barchasi...</span>
+        <span class="quote q6">O'tinaman qutqarma cho'ksam nigohingda...</span>
+        <span class="quote q3">Menga sevishingni ayt, senga jonimni fido qilay.</span>
+        <span class="quote q4">Hey, menga tuyg'ularingni yubor...</span>
+        <span class="quote q5">Uy qurayapman kelasan deb qachondir.</span>
+          <span class="quote q2">Senda bor-yo'g'i bitta ishim bor. Meni bir umrlik tashvishim bo'l.</span>
+        <span class="quote q7">Go'zallar ko'p, lekin bu ko'zlar alohida.</span>
+    </div>
+
+    <!-- 1-Sahifa: Asosiy taklif -->
+    <div class="container" id="main-card">
+        <div class="heart-icon">💖</div>
+        <h1 id="question">Salom, men bugun sizni uchrashuvga taklif qilmoqchiman. Men bilan bir kuningizni o'tqazasizmi? ☕✨</h1>
+        
+        <div class="buttons">
+            <button id="yes-btn">Ha, albatta! 😍</button>
+            <button id="no-btn">Yo'q 😢</button>
+        </div>
+    </div>
+
+    <!-- 2-Sahifa: Detallarni tanlash -->
+    <div class="container hidden" id="details-card">
+        <div class="heart-icon" id="stage-icon">🎉</div>
+        <h1 id="stage-title">Uraaa! Kelishdik! 😍</h1>
+        <p id="stage-subtitle" style="color: #aaa; margin-bottom: 20px;">Uchrashuvni qayerda o'tkazamiz? Tanlang:</p>
+        
+        <!-- 1-Bosqich: Lokatsiyalar -->
+        <div class="options-grid" id="location-options">
+            <div class="option-card" onclick="selectLocation('Parkda sayr 🌳✨')">
+                <span>🌳✨</span>
+                <p>Parkda sayr</p>
+            </div>
+            <div class="option-card" onclick="selectLocation('Restoranga borish 🍽️🥂')">
+                <span>🍽️🥂</span>
+                <p>Restoranga borish</p>
+            </div>
+            <div class="option-card" onclick="selectLocation('Kinoga borish 🎬🍿')">
+                <span>🎬🍿</span>
+                <p>Kinoga borish</p>
+            </div>
+        </div>
+
+        <!-- 2-Bosqich: Kunni tanlash -->
+        <div class="options-grid hidden" id="day-options">
+            <div class="option-card" onclick="selectDay('Shanba')">
+                <span>📅</span>
+                <p>Shanba kuni</p>
+            </div>
+            <div class="option-card" onclick="selectDay('Yakshanba')">
+                <span>📅</span>
+                <p>Yakshanba kuni</p>
+            </div>
+        </div>
+
+        <!-- 3-Bosqich: Vaqtni tanlash -->
+        <div class="options-grid hidden" id="time-options">
+            <div class="option-card" onclick="selectTime('16:00')">
+                <span>🕒</span>
+                <p>16:00 da</p>
+            </div>
+            <div class="option-card" onclick="selectTime('17:00')">
+                <span>🕓</span>
+                <p>17:00 da</p>
+            </div>
+            <div class="option-card" onclick="selectTime('18:00')">
+                <span>🕔</span>
+                <p>18:00 da</p>
+            </div>
+        </div>
+
+        <h3 id="final-message" style="color: #d4af37; margin-top: 25px; min-height: 30px; line-height: 1.6;"></h3>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

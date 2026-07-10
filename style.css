@@ -1,0 +1,223 @@
+/* Umumiy sozlamalar — to'q va nafis fon */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle, #1a1a1a 0%, #0d0d0d 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Orqa fondagi iqtiboslar konteyneri */
+.bg-quotes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* Iqtibos uslubi — matnlar to'qroq va o'qilishi oson qilindi (opacity oshirildi) */
+.quote {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.12); /* 0.04 dan 0.12 ga oshirildi - to'qroq */
+    font-size: 16px;
+    font-style: italic;
+    white-space: nowrap;
+    animation: floatUp 15s infinite linear;
+}
+
+/* Ayrim iqtiboslarni oltinrang va yanada to'qroq qilish */
+.q1 { top: 12%; left: 5%; animation-duration: 18s; font-size: 18px; color: rgba(214, 175, 55, 0.15); }
+.q2 { top: 28%; right: 5%; animation-duration: 22s; }
+.q3 { bottom: 18%; left: 8%; animation-duration: 16s; }
+.q4 { bottom: 35%; right: 8%; animation-duration: 25s; color: rgba(214, 175, 55, 0.12); }
+.q5 { top: 6%; right: 15%; animation-duration: 20s; }
+.q6 { bottom: 8%; left: 15%; animation-duration: 14s; }
+.q7 { top: 45%; left: 2%; animation-duration: 28s; }
+
+/* Sekin suzish animatsiyasi */
+@keyframes floatUp {
+    0% {
+        transform: translateY(15px);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+}
+
+/* Elegant karta dizayni */
+.container {
+    position: relative;
+    z-index: 10;
+    background: rgba(20, 20, 20, 0.6); /* Telefon fonida yaxshi ko'rinishi uchun biroz to'q qilindi */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); /* Safari (iOS) uchun */
+    padding: 35px 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    max-width: 400px;
+    width: 85%;
+    transition: all 0.5s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.heart-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+    animation: heartbeat 1.2s infinite;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+p {
+    font-size: 15px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+    height: 60px;
+    align-items: center;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s, background 0.3s;
+}
+
+#yes-btn {
+    background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+#no-btn {
+    background-color: #333;
+    color: #aaa;
+    position: absolute;
+    right: 20px; 
+    transition: left 0.3s ease-out, top 0.3s ease-out, transform 0.2s;
+}
+
+/* Variantlar tarmog'i */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#day-options {
+    grid-template-columns: repeat(2, 1fr) !important;
+    max-width: 280px;
+    margin: 20px auto 0 auto;
+}
+
+.option-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option-card span {
+    font-size: 26px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.option-card p {
+    color: #fff;
+    margin: 0;
+    font-size: 12px;
+}
+
+/* === TELEFONLAR UCHUN MAXSUS MOSLASHUV (MEDIA QUERIES) === */
+@media (max-width: 480px) {
+    .container {
+        padding: 25px 15px;
+        width: 88%;
+    }
+    
+    h1 {
+        font-size: 19px; /* Telefonda savol sig'ishi uchun kichraytirildi */
+        margin-bottom: 20px;
+    }
+
+    .quote {
+        font-size: 13px; /* Telefonda iqtiboslar daxshatli katta ko'rinmasligi uchun */
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr; /* Katakchalar telefonda juda siqilib ketmasligi uchun bittadan qator bo'ladi */
+        gap: 10px;
+    }
+
+    #day-options {
+        grid-template-columns: 1fr !important;
+        max-width: 100%;
+    }
+
+    .option-card {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px 15px;
+        gap: 15px;
+    }
+
+    .option-card span {
+        margin-bottom: 0;
+        font-size: 22px;
+    }
+
+    .option-card p {
+        font-size: 14px;
+    }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.1); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.15); }
+    80% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
