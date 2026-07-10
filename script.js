@@ -1,91 +1,58 @@
-const noBtn = document.getElementById('no-btn');
-const yesBtn = document.getElementById('yes-btn');
-const mainCard = document.getElementById('main-card');
-const detailsCard = document.getElementById('details-card');
-const finalMessage = document.getElementById('final-message');
-
-// Elementlar bosqichlari
-const stageTitle = document.getElementById('stage-title');
-const stageSubtitle = document.getElementById('stage-subtitle');
-const locationOptions = document.getElementById('location-options');
-const dayOptions = document.getElementById('day-options');
-const timeOptions = document.getElementById('time-options');
-
-// Tanlangan ma'lumotlarni saqlash uchun obyekt
-let uchrashuvData = {
-    lokatsiya: '',
-    kun: '',
-    vaqt: ''
-};
-
-// "Yo'q" tugmasining qochishi
-function qochibKet() {
-    const padding = 150; 
-    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-
-    let randomX = Math.floor(Math.random() * maxX);
-    let randomY = Math.floor(Math.random() * maxY);
-
-    if (randomX < padding) randomX = padding;
-    if (randomY < padding) randomY = padding;
-
-    noBtn.style.position = 'fixed';
-    noBtn.style.left = randomX + 'px';
-    noBtn.style.top = randomY + 'px';
+/* Iqtibos uslubi — matnlar ancha to'q va telefonda ko'rinadigan qilindi */
+.quote {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.25); /* To'qlik darajasi 0.12 dan 0.25 ga oshirildi! */
+    font-size: 16px;
+    font-style: italic;
+    white-space: nowrap;
+    animation: floatUp 20s infinite linear;
+    bottom: -100px; /* Matnlar pastdan ko'tariladi */
 }
-noBtn.addEventListener('mouseenter', qochibKet);
-noBtn.addEventListener('click', qochibKet);
 
-// "Ha" tugmasi bosilganda
-yesBtn.addEventListener('click', () => {
-    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
-    mainCard.classList.add('hidden');
-    detailsCard.classList.remove('hidden');
-});
+/* Har bir iqtibosga har xil joylashuv (chapdan masofa) va tezlik beramiz */
+.q1 { left: 5%; animation-delay: 0s; font-size: 18px; color: rgba(214, 175, 55, 0.3); } /* Oltinrang ham to'q qilindi */
+.q2 { left: 15%; animation-delay: 3s; }
+.q3 { left: 30%; animation-delay: 6s; }
+.q4 { left: 50%; animation-delay: 9s; color: rgba(214, 175, 55, 0.25); }
+.q5 { left: 65%; animation-duration: 22s; animation-delay: 12s; }
+.q6 { left: 10%; animation-duration: 18s; animation-delay: 15s; }
+.q7 { left: 40%; animation-duration: 25s; animation-delay: 2s; }
 
-// 1-Bosqich: Lokatsiya tanlanganda
-function selectLocation(loc) {
-    uchrashuvData.lokatsiya = loc;
+/* Animatsiyani o'zgartiramiz: Butun ekran bo'ylab pastdan tepaga chiqadi */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; /* Tezda ko'rinadigan bo'ladi */
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh); /* Ekrandan butunlay tepaga chiqib ketadi */
+        opacity: 0;
+    }
+}
+
+/* === TELEFONLAR UCHUN EFFEKTNI YANADA CHIROYLILASHTIRISH === */
+@media (max-width: 480px) {
+    .container {
+        padding: 25px 15px;
+        width: 88%;
+        background: rgba(15, 15, 15, 0.75); /* Karta foni biroz to'q qilinib, matnlar chetda yaqqol ko'rinadigan bo'ldi */
+    }
+
+    .quote {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.35); /* Telefon ekranida yanada to'qroq ko'rinishi uchun */
+    }
     
-    // Lokatsiyalarni yashirib, kunlarni ko'rsatamiz
-    locationOptions.classList.add('hidden');
-    stageTitle.innerHTML = "Ajoyib lokatsiya! 👌";
-    stageSubtitle.innerHTML = "Endi esa qaysi kuni uchrashishimiz qulay? Tanlang:";
-    dayOptions.classList.remove('hidden');
-
-    confetti({ particleCount: 40, spread: 40, origin: { y: 0.7 } });
-}
-
-// 2-Bosqich: Kun tanlanganda
-function selectDay(day) {
-    uchrashuvData.kun = day;
-
-    // Kunlarni yashirib, vaqtni ko'rsatamiz
-    dayOptions.classList.add('hidden');
-    stageTitle.innerHTML = "Ajoyib kun! 🗓️";
-    stageSubtitle.innerHTML = "Soat nechchida uchrashamiz? Tanlang:";
-    timeOptions.classList.remove('hidden');
-
-    confetti({ particleCount: 40, spread: 40, origin: { y: 0.7 } });
-}
-
-// 3-Bosqich: Vaqt tanlanganda (Yakuniy qism)
-function selectTime(time) {
-    uchrashuvData.vaqt = time;
-
-    // Vaqtlarni ham yashiramiz va sarlavhalarni chiroyli qilamiz
-    timeOptions.classList.add('hidden');
-    stageTitle.innerHTML = "Hammasi tayyor! 🎉";
-    stageSubtitle.innerHTML = "Uchrashuv detallari tasdiqlandi:";
-
-    // Yakuniy xulosani ekranga chiqaramiz
-    finalMessage.innerHTML = `
-        📍 Joy: <strong>${uchrashuvData.lokatsiya}</strong><br>
-        📅 Kun: <strong>${uchrashuvData.kun} kuni</strong><br>
-        🕒 Vaqt: <strong>Soat ${uchrashuvData.vaqt} da</strong><br><br>
-        Tez orada ko'rishguncha! 😉
-    `;
-
-    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    /* Telefon ekranida iqtiboslar bir-biriga yopishib ketmasligi uchun ularni tarqatamiz */
+    .q1 { left: 2%; animation-duration: 16s; }
+    .q2 { left: 8%; animation-duration: 20s; }
+    .q3 { left: 4%; animation-duration: 24s; }
+    .q4 { left: 6%; animation-duration: 18s; }
+    .q5 { left: 3%; animation-duration: 22s; }
 }
