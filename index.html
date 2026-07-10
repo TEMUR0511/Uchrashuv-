@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Maxsus Taklif ✨</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -12,11 +12,11 @@
     <!-- Orqa fondagi harakatlanuvchi iqtiboslar -->
     <div class="bg-quotes">
         <span class="quote q1">Sengacha yillarim bu zerikarli yillar, seni izlab barchasi...</span>
-        <span class="quote q6">O'tinaman qutqarma cho'ksam nigohingda...</span>
+        <span class="quote q2">Senda bor-yo'g'i bitta ishim bor. Meni bir umrlik tashvishim bo'l.</span>
         <span class="quote q3">Menga sevishingni ayt, senga jonimni fido qilay.</span>
         <span class="quote q4">Hey, menga tuyg'ularingni yubor...</span>
         <span class="quote q5">Uy qurayapman kelasan deb qachondir.</span>
-          <span class="quote q2">Senda bor-yo'g'i bitta ishim bor. Meni bir umrlik tashvishim bo'l.</span>
+        <span class="quote q6">O'tinaman qutqarma cho'ksam nigohingda...</span>
         <span class="quote q7">Go'zallar ko'p, lekin bu ko'zlar alohida.</span>
     </div>
 
@@ -84,6 +84,92 @@
         <h3 id="final-message" style="color: #d4af37; margin-top: 25px; min-height: 30px; line-height: 1.6;"></h3>
     </div>
 
-    <script src="script.js"></script>
+    <!-- TO'G'RIDAN-TO'G'RI INPUT SCRIPT — KESH BILAN MUAMMO BO'LMAYDI -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+            const mainCard = document.getElementById('main-card');
+            const detailsCard = document.getElementById('details-card');
+
+            // "Yo'q" tugmasining qochishi (Faqat kompyuterda)
+            function qochibKet() {
+                if (window.matchMedia("(max-width: 480px)").matches) return;
+                const padding = 150; 
+                const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+                const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+                let randomX = Math.floor(Math.random() * maxX);
+                let randomY = Math.floor(Math.random() * maxY);
+                if (randomX < padding) randomX = padding;
+                if (randomY < padding) randomY = padding;
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+            }
+
+            if(noBtn) {
+                noBtn.addEventListener('mouseenter', qochibKet);
+                noBtn.addEventListener('click', function(e) {
+                    if (window.matchMedia("(max-width: 480px)").matches) {
+                        alert("Baribir yo'q deya olmaysiz! 😉 Haqiqiy tanlovni bosing.");
+                    } else {
+                        qochibKet();
+                    }
+                });
+            }
+
+            if(yesBtn) {
+                yesBtn.addEventListener('click', function() {
+                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+                    mainCard.style.display = 'none';
+                    detailsCard.style.display = 'block';
+                    detailsCard.classList.remove('hidden');
+                });
+            }
+        });
+
+        let uchrashuvData = { lokatsiya: '', kun: '', vaqt: '' };
+
+        function selectLocation(loc) {
+            uchrashuvData.lokatsiya = loc;
+            document.getElementById('location-options').style.display = 'none';
+            document.getElementById('stage-title').innerHTML = "Ajoyib lokatsiya! 👌";
+            document.getElementById('stage-subtitle').innerHTML = "Endi esa qaysi kuni uchrashishimiz qulay? Tanlang:";
+            
+            const dayOpts = document.getElementById('day-options');
+            dayOpts.style.display = 'grid';
+            dayOpts.classList.remove('hidden');
+            
+            confetti({ particleCount: 40, spread: 40, origin: { y: 0.7 } });
+        }
+
+        function selectDay(day) {
+            uchrashuvData.kun = day;
+            document.getElementById('day-options').style.display = 'none';
+            document.getElementById('stage-title').innerHTML = "Ajoyib kun! 🗓️";
+            document.getElementById('stage-subtitle').innerHTML = "Soat nechchida uchrashamiz? Tanlang:";
+            
+            const timeOpts = document.getElementById('time-options');
+            timeOpts.style.display = 'grid';
+            timeOpts.classList.remove('hidden');
+            
+            confetti({ particleCount: 40, spread: 40, origin: { y: 0.7 } });
+        }
+
+        function selectTime(time) {
+            uchrashuvData.vaqt = time;
+            document.getElementById('time-options').style.display = 'none';
+            document.getElementById('stage-title').innerHTML = "Hammasi tayyor! 🎉";
+            document.getElementById('stage-subtitle').innerHTML = "Uchrashuv detallari tasdiqlandi:";
+
+            document.getElementById('final-message').innerHTML = `
+                📍 Joy: <strong>${uchrashuvData.lokatsiya}</strong><br>
+                📅 Kun: <strong>${uchrushuvData.kun || uchrashuvData.kun} kuni</strong><br>
+                🕒 Vaqt: <strong>Soat ${uchrashuvData.vaqt} da</strong><br><br>
+                Tez orada ko'rishguncha! 😉
+            `;
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        }
+    </script>
 </body>
 </html>
