@@ -25,39 +25,40 @@ body {
     pointer-events: none;
 }
 
-/* Iqtibos uslubi — matnlar to'qroq va o'qilishi oson qilindi (opacity oshirildi) */
+/* Iqtibos uslubi — matnlar ancha to'q va telefonda ko'rinadigan qilindi */
 .quote {
     position: absolute;
-    color: rgba(255, 255, 255, 0.12); /* 0.04 dan 0.12 ga oshirildi - to'qroq */
+    color: rgba(255, 255, 255, 0.25); /* To'qlik darajasi oshirildi */
     font-size: 16px;
     font-style: italic;
     white-space: nowrap;
-    animation: floatUp 15s infinite linear;
+    animation: floatUp 20s infinite linear;
+    bottom: -100px; /* Matnlar ekranning eng pastidan ko'tariladi */
 }
 
-/* Ayrim iqtiboslarni oltinrang va yanada to'qroq qilish */
-.q1 { top: 12%; left: 5%; animation-duration: 18s; font-size: 18px; color: rgba(214, 175, 55, 0.15); }
-.q2 { top: 28%; right: 5%; animation-duration: 22s; }
-.q3 { bottom: 18%; left: 8%; animation-duration: 16s; }
-.q4 { bottom: 35%; right: 8%; animation-duration: 25s; color: rgba(214, 175, 55, 0.12); }
-.q5 { top: 6%; right: 15%; animation-duration: 20s; }
-.q6 { bottom: 8%; left: 15%; animation-duration: 14s; }
-.q7 { top: 45%; left: 2%; animation-duration: 28s; }
+/* Har bir iqtibosga har xil joylashuv (chapdan masofa) va tezlik beramiz */
+.q1 { left: 5%; animation-delay: 0s; font-size: 18px; color: rgba(214, 175, 55, 0.3); } /* Nafis oltinrang */
+.q2 { left: 15%; animation-delay: 3s; }
+.q3 { left: 30%; animation-delay: 6s; }
+.q4 { left: 50%; animation-delay: 9s; color: rgba(214, 175, 55, 0.25); }
+.q5 { left: 65%; animation-duration: 22s; animation-delay: 12s; }
+.q6 { left: 10%; animation-duration: 18s; animation-delay: 15s; }
+.q7 { left: 40%; animation-duration: 25s; animation-delay: 2s; }
 
-/* Sekin suzish animatsiyasi */
+/* Animatsiya: Butun ekran bo'ylab pastdan tepaga silliq chiqadi */
 @keyframes floatUp {
     0% {
-        transform: translateY(15px);
+        transform: translateY(0);
         opacity: 0;
     }
-    30% {
-        opacity: 1;
+    10% {
+        opacity: 1; /* Ekran tubida tezda ko'rinadigan bo'ladi */
     }
-    70% {
+    90% {
         opacity: 1;
     }
     100% {
-        transform: translateY(-30px);
+        transform: translateY(-120vh); /* Ekrandan butunlay tepaga chiqib ketadi */
         opacity: 0;
     }
 }
@@ -66,7 +67,7 @@ body {
 .container {
     position: relative;
     z-index: 10;
-    background: rgba(20, 20, 20, 0.6); /* Telefon fonida yaxshi ko'rinishi uchun biroz to'q qilindi */
+    background: rgba(20, 20, 20, 0.65); /* Orqasidagi matnlar chetda yaqqol ko'rinishi uchun karta foni biroz to'q qilindi */
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px); /* Safari (iOS) uchun */
@@ -126,6 +127,11 @@ button {
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
 }
 
+#yes-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
 #no-btn {
     background-color: #333;
     color: #aaa;
@@ -169,24 +175,41 @@ button {
     font-size: 12px;
 }
 
-/* === TELEFONLAR UCHUN MAXSUS MOSLASHUV (MEDIA QUERIES) === */
+.option-card:hover {
+    transform: translateY(-5px);
+    background: rgba(214, 175, 55, 0.15);
+    border-color: #d4af37;
+}
+
+/* === TELEFONLAR UCHUN MAXSUS MOSLASHUV === */
 @media (max-width: 480px) {
     .container {
         padding: 25px 15px;
         width: 88%;
+        background: rgba(15, 15, 15, 0.8); /* Telefon ekranida karta foni yanada to'qroq */
     }
     
     h1 {
-        font-size: 19px; /* Telefonda savol sig'ishi uchun kichraytirildi */
+        font-size: 19px;
         margin-bottom: 20px;
     }
 
     .quote {
-        font-size: 13px; /* Telefonda iqtiboslar daxshatli katta ko'rinmasligi uchun */
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.35); /* Telefon fonida matnlar ancha to'qroq va sezilarli */
     }
+    
+    /* Telefonda uzun yozuvlar chalkashib ketmasligi uchun ularni ekranning chap qismiga tarqatamiz */
+    .q1 { left: 2%; animation-duration: 16s; }
+    .q2 { left: 6%; animation-duration: 20s; }
+    .q3 { left: 4%; animation-duration: 24s; }
+    .q4 { left: 8%; animation-duration: 18s; }
+    .q5 { left: 3%; animation-duration: 22s; }
+    .q6 { left: 5%; animation-duration: 15s; }
+    .q7 { left: 1%; animation-duration: 26s; }
 
     .options-grid {
-        grid-template-columns: 1fr; /* Katakchalar telefonda juda siqilib ketmasligi uchun bittadan qator bo'ladi */
+        grid-template-columns: 1fr; /* Katakchalar telefonda bittadan bo'lib qatorlashadi */
         gap: 10px;
     }
 
@@ -213,6 +236,7 @@ button {
     }
 }
 
+/* Yurak urishi animatsiyasi */
 @keyframes heartbeat {
     0% { transform: scale(1); }
     20% { transform: scale(1.1); }
