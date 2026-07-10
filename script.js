@@ -88,25 +88,4 @@ function selectTime(time) {
     `;
 
     confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-}}
-
-/* === TELEFONLAR UCHUN EFFEKTNI YANADA CHIROYLILASHTIRISH === */
-@media (max-width: 480px) {
-    .container {
-        padding: 25px 15px;
-        width: 88%;
-        background: rgba(15, 15, 15, 0.75); /* Karta foni biroz to'q qilinib, matnlar chetda yaqqol ko'rinadigan bo'ldi */
-    }
-
-    .quote {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.35); /* Telefon ekranida yanada to'qroq ko'rinishi uchun */
-    }
-    
-    /* Telefon ekranida iqtiboslar bir-biriga yopishib ketmasligi uchun ularni tarqatamiz */
-    .q1 { left: 2%; animation-duration: 16s; }
-    .q2 { left: 8%; animation-duration: 20s; }
-    .q3 { left: 4%; animation-duration: 24s; }
-    .q4 { left: 6%; animation-duration: 18s; }
-    .q5 { left: 3%; animation-duration: 22s; }
 }
