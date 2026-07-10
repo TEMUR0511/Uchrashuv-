@@ -18,8 +18,13 @@ let uchrashuvData = {
     vaqt: ''
 };
 
-// "Yo'q" tugmasining qochishi
-function qochibKet() {
+// "Yo'q" tugmasining silliq qochish funksiyasi
+function qochibKet(e) {
+    // Telefonda (touch-ekranda) qochish funksiyasini cheklaymiz, chunki barmoq tekkanda xatolik beradi
+    if (window.matchMedia("(max-width: 480px)").matches) {
+        return; 
+    }
+
     const padding = 150; 
     const maxX = window.innerWidth - noBtn.offsetWidth - padding;
     const maxY = window.innerHeight - noBtn.offsetHeight - padding;
@@ -34,8 +39,18 @@ function qochibKet() {
     noBtn.style.left = randomX + 'px';
     noBtn.style.top = randomY + 'px';
 }
+
+// Faqat kompyuterda sichqoncha yaqinlashganda qochadi
 noBtn.addEventListener('mouseenter', qochibKet);
-noBtn.addEventListener('click', qochibKet);
+
+// Telefonda barmoq tekkanda (click bo'lganda) xafa bo'lgan xabar chiqadi yoki qochmaydi
+noBtn.addEventListener('click', (e) => {
+    if (window.matchMedia("(max-width: 480px)").matches) {
+        alert("Baribir yo'q deya olmaysiz! 😉 Haqiqiy tanlovni bosing.");
+    } else {
+        qochibKet(e);
+    }
+});
 
 // "Ha" tugmasi bosilganda
 yesBtn.addEventListener('click', () => {
@@ -48,7 +63,6 @@ yesBtn.addEventListener('click', () => {
 function selectLocation(loc) {
     uchrashuvData.lokatsiya = loc;
     
-    // Lokatsiyalarni yashirib, kunlarni ko'rsatamiz
     locationOptions.classList.add('hidden');
     stageTitle.innerHTML = "Ajoyib lokatsiya! 👌";
     stageSubtitle.innerHTML = "Endi esa qaysi kuni uchrashishimiz qulay? Tanlang:";
@@ -61,7 +75,6 @@ function selectLocation(loc) {
 function selectDay(day) {
     uchrashuvData.kun = day;
 
-    // Kunlarni yashirib, vaqtni ko'rsatamiz
     dayOptions.classList.add('hidden');
     stageTitle.innerHTML = "Ajoyib kun! 🗓️";
     stageSubtitle.innerHTML = "Soat nechchida uchrashamiz? Tanlang:";
@@ -74,12 +87,10 @@ function selectDay(day) {
 function selectTime(time) {
     uchrashuvData.vaqt = time;
 
-    // Vaqtlarni ham yashiramiz va sarlavhalarni chiroyli qilamiz
     timeOptions.classList.add('hidden');
     stageTitle.innerHTML = "Hammasi tayyor! 🎉";
     stageSubtitle.innerHTML = "Uchrashuv detallari tasdiqlandi:";
 
-    // Yakuniy xulosani ekranga chiqaramiz
     finalMessage.innerHTML = `
         📍 Joy: <strong>${uchrashuvData.lokatsiya}</strong><br>
         📅 Kun: <strong>${uchrashuvData.kun} kuni</strong><br>
