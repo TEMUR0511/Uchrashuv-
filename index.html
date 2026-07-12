@@ -21,7 +21,7 @@
             position: relative;
         }
 
-        /* IQTIBOSLAR FON QISMI */
+        /* IQTIBOSLAR VA YULDUZCHALAR FON QISMI */
         .bg-quotes {
             position: absolute;
             width: 100%;
@@ -33,50 +33,66 @@
             pointer-events: none;
         }
 
-        .quote {
+        .quote, .floating-emoji {
             position: absolute;
+            bottom: -180px;
+            opacity: 0;
+            animation: floatUp 35s infinite linear;
+        }
+
+        .quote {
             color: rgba(255, 255, 255, 0.23);
             font-size: 15px;
             font-style: italic;
             white-space: nowrap;
-            animation: floatUp 35s infinite linear; /* Sekin qalqib chiqish tezligi */
-            bottom: -180px;
-            opacity: 0;
         }
 
-        /* 12 ta iqtibos uchun ekranda chiqish vaqtlari */
+        /* Mayda uchar yulduz va yurakchalar uchun effekt */
+        .floating-emoji {
+            font-size: 14px;
+            filter: drop-shadow(0 0 8px rgba(214, 175, 55, 0.6));
+            animation-duration: 20s; /* Elementlar tezroq suzadi */
+        }
+
+        /* 12 ta iqtibos va dekoratsiyalar joylashuvi */
         .q1 { left: 5%; animation-delay: 0s; color: rgba(214, 175, 55, 0.3); }
+        .e1 { left: 20%; animation-delay: 1.5s; font-size: 12px; }
         .q2 { left: 15%; animation-delay: 3s; }
         .q3 { left: 8%; animation-delay: 6s; }
+        .e2 { left: 45%; animation-delay: 7.5s; font-size: 16px; }
         .q4 { left: 25%; animation-delay: 9s; }
         .q5 { left: 35%; animation-delay: 12s; color: rgba(214, 175, 55, 0.25); }
+        .e3 { left: 75%; animation-delay: 13.5s; }
         .q6 { left: 12%; animation-delay: 15s; }
         .q7 { left: 2%; animation-delay: 18s; }
+        .e4 { left: 60%; animation-delay: 19.5s; font-size: 10px; }
         .q8 { left: 18%; animation-delay: 21s; }
         .q9 { left: 6%; animation-delay: 24s; }
+        .e5 { left: 85%; animation-delay: 25.5s; }
         .q10 { left: 30%; animation-delay: 27s; }
         .q11 { left: 10%; animation-delay: 30s; }
+        .e6 { left: 3%; animation-delay: 31.5s; }
         .q12 { left: 40%; animation-delay: 33s; }
 
         @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(-140vh); opacity: 0; }
+            100% { transform: translateY(-140vh) rotate(20deg); opacity: 0; }
         }
 
-        /* KARTALAR DIZAYNI */
+        /* KARTALAR DIZAYNI (TILLA NEON YOG'DUSI BILAN) */
         .container {
             position: relative;
             z-index: 10;
-            background: rgba(20, 20, 20, 0.7) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(20, 20, 20, 0.72) !important;
+            border: 1px solid rgba(214, 175, 55, 0.2); /* Mayin oltin chegara */
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             padding: 35px 25px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(214, 175, 55, 0.15); /* Tilla rangli Glow */
             max-width: 400px;
             width: 85%;
             transition: all 0.5s ease;
@@ -96,6 +112,7 @@
             align-items: center;
         }
 
+        /* TUGMALAR VA MIKRO-ANIMATSIYA */
         button {
             padding: 12px 24px;
             font-size: 15px;
@@ -103,7 +120,13 @@
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
-            transition: transform 0.2s, background 0.3s;
+            transition: transform 0.1s ease, background 0.3s;
+            touch-action: manipulation;
+        }
+
+        /* Bosilganda ichkariga botish effekti */
+        button:active {
+            transform: scale(0.92) !important;
         }
 
         #yes-btn {
@@ -119,6 +142,7 @@
             right: 20px;
         }
 
+        /* TANLOV KARTALARI ANIMATSIYASI */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -132,13 +156,17 @@
             padding: 12px 5px;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             touch-action: manipulation;
+        }
+
+        .option-card:active {
+            transform: scale(0.95);
         }
 
         .option-card span { font-size: 26px; display: block; margin-bottom: 6px; }
         .option-card p { color: #fff !important; margin: 0; font-size: 12px; }
-        .option-card:hover { transform: translateY(-5px); background: rgba(214, 175, 55, 0.15); border-color: #d4af37; }
+        .option-card:hover { transform: translateY(-3px); background: rgba(214, 175, 55, 0.15); border-color: #d4af37; }
 
         .music-control {
             position: fixed;
@@ -158,8 +186,9 @@
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(5px);
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
+        .music-control:active { transform: scale(0.88); }
 
         @keyframes heartbeat {
             0%, 40%, 80%, 100% { transform: scale(1); }
@@ -168,7 +197,7 @@
 
         /* TELEFON MOSLASHUVI */
         @media (max-width: 480px) {
-            .container { padding: 25px 15px; width: 88%; background: rgba(15, 15, 15, 0.85) !important; }
+            .container { padding: 25px 15px; width: 88%; background: rgba(15, 15, 15, 0.85) !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(214, 175, 55, 0.12); }
             h1 { font-size: 19px; margin-bottom: 20px; }
             
             .quote { 
@@ -177,7 +206,7 @@
                 width: 75% !important; 
                 line-height: 1.5;
                 color: rgba(255, 255, 255, 0.28) !important;
-                animation: floatUp 40s infinite linear; /* Telefonda uzun matnlar yanada sekin chiqadi */
+                animation: floatUp 40s infinite linear;
             }
             
             .q1 { left: 6% !important; animation-delay: 0s !important; }
@@ -206,22 +235,25 @@
     <audio id="bg-music" loop src="music.mp3"></audio>
     <div class="music-control" id="music-btn" onclick="toggleMusic()">🔇</div>
 
-    <!-- ORQA FONDAGI BARCHA IQTIBOSLAR (TO'LIQ VA BIRLASHTIRILGAN) -->
+    <!-- ORQA FONDAGI BARCHA IQTIBOSLAR VA NEON DEKORATSIYALAR -->
     <div class="bg-quotes">
-        <!-- Birinchi yozilgan iqtiboslar -->
         <span class="quote q1">Sengacha yillarim bu zerikarli yillar, seni izlab barchasi...</span>
+        <span class="floating-emoji e1">✨</span>
         <span class="quote q2">Senda bor-yo'g'i bitta ishim bor. Meni bir umrlik tashvishim bo'l.</span>
         <span class="quote q3">Menga sevishingni ayt, senga jonimni fido qilay.</span>
+        <span class="floating-emoji e2">💖</span>
         <span class="quote q4">Hey, menga tuyg'ularingni yubor...</span>
         <span class="quote q5">Uy qurayapman kelasan deb qachondir.</span>
+        <span class="floating-emoji e3">✨</span>
         <span class="quote q6">O'tinaman qutqarma cho'ksam nigohingda...</span>
         <span class="quote q7">Go'zallar ko'p, lekin bu ko'zlar alohida.</span>
-        
-        <!-- Keyingi qo'shilgan daxshat iqtiboslar -->
+        <span class="floating-emoji e4">💖</span>
         <span class="quote q8">Oshiqman faqat sen uchun dunyoga kelgan, ozoringga ko'nib sevgan...</span>
         <span class="quote q9">Oshiqman seni hammadan qizg'onib sevgan 💖</span>
+        <span class="floating-emoji e5">✨</span>
         <span class="quote q10">Endi hayotimda muhim o'rning bor. Har bir go'zal shaharlarni men bilan ko'rgin ming bor 🗺️✨</span>
         <span class="quote q11">Sen faqat kulishing uchun, bir bora kulishing uchun borimni beray...</span>
+        <span class="floating-emoji e6">✨</span>
         <span class="quote q12">Faqat so'ramagin mahrga gelik, shundog'am bo'lasan eng baxtli kelin 💍. Otabekning kumushiday sev. Kerak emas shahlo ko'zlaring, sumbul sochlaring. Qalbim uchun kifoya sening shirin so'zlaring. ✨</span>
     </div>
 
@@ -354,14 +386,435 @@
 
         let uchrashuvData = { lokatsiya: '', kun: '', vaqt: '' };
 
-        // Bosqichlar logikasi
         function selectLocation(loc) {
             uchrashuvData.lokatsiya = loc;
             document.getElementById('location-options').classList.add('hidden');
             document.getElementById('stage-title').innerHTML = "Ajoyib lokatsiya! 👌";
             document.getElementById('stage-subtitle').innerHTML = "Endi esa qaysi kuni uchrashishimiz qulay? Tanlang:";
             document.getElementById('day-options').classList.remove('hidden');
+            confetti({ particleCount: 40, spread:Spread = 40, origin: { y: 0.7 } });
+        }
+
+        function selectDay(day) {
+            uchrashuvData.kun = day;
+            document.getElementById('day-options').classList.add('hidden');
+            document.getElementById('stage-title').innerHTML = "Ajoyib kun! 🗓️";
+            document.getElementById('stage-subtitle').innerHTML = "Soat nechchida uchrashamiz? Tanlang:";
+            document.getElementById('time-options').classList.remove('hidden');
             confetti({ particleCount: 40, spread: 40, origin: { y: 0.7 } });
+        }
+
+        function selectTime(time) {
+            uchrashuvData.vaqt = time;
+            document.getElementById('time-options').classList.add('hidden');
+            document.getElementById('stage-title').innerHTML = "Hammasi tayyor! 🎉";
+            document.getElementById('stage-subtitle').innerHTML = "Uchrashuv detallari tasdiqlandi:";
+
+            document.getElementById('final-message').innerHTML = `
+                📍 Joy: <strong>${uchrashuvData.lokatsiya}</strong><br>
+                📅 Kun: <strong>${uchrashuvData.kun} kuni</strong><br>
+                🕒 Vaqt: <strong>Soat ${uchrashuvData.vaqt || time} da</strong><br><br>
+                Tez orada ko'rishguncha! 😉
+            `;
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maxsus Taklif ✨</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle, #1a1a1a 0%, #0d0d0d 100%) !important;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* IQTIBOSLAR VA YULDUZCHALAR FON QISMI */
+        .bg-quotes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .quote, .floating-emoji {
+            position: absolute;
+            bottom: -180px;
+            opacity: 0;
+            animation: floatUp 35s infinite linear;
+        }
+
+        .quote {
+            color: rgba(255, 255, 255, 0.23);
+            font-size: 15px;
+            font-style: italic;
+            white-space: nowrap;
+        }
+
+        /* Mayda uchar yulduz va yurakchalar uchun effekt */
+        .floating-emoji {
+            font-size: 14px;
+            filter: drop-shadow(0 0 8px rgba(214, 175, 55, 0.6));
+            animation-duration: 20s; /* Elementlar tezroq suzadi */
+        }
+
+        /* 12 ta iqtibos va dekoratsiyalar joylashuvi */
+        .q1 { left: 5%; animation-delay: 0s; color: rgba(214, 175, 55, 0.3); }
+        .e1 { left: 20%; animation-delay: 1.5s; font-size: 12px; }
+        .q2 { left: 15%; animation-delay: 3s; }
+        .q3 { left: 8%; animation-delay: 6s; }
+        .e2 { left: 45%; animation-delay: 7.5s; font-size: 16px; }
+        .q4 { left: 25%; animation-delay: 9s; }
+        .q5 { left: 35%; animation-delay: 12s; color: rgba(214, 175, 55, 0.25); }
+        .e3 { left: 75%; animation-delay: 13.5s; }
+        .q6 { left: 12%; animation-delay: 15s; }
+        .q7 { left: 2%; animation-delay: 18s; }
+        .e4 { left: 60%; animation-delay: 19.5s; font-size: 10px; }
+        .q8 { left: 18%; animation-delay: 21s; }
+        .q9 { left: 6%; animation-delay: 24s; }
+        .e5 { left: 85%; animation-delay: 25.5s; }
+        .q10 { left: 30%; animation-delay: 27s; }
+        .q11 { left: 10%; animation-delay: 30s; }
+        .e6 { left: 3%; animation-delay: 31.5s; }
+        .q12 { left: 40%; animation-delay: 33s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-140vh) rotate(20deg); opacity: 0; }
+        }
+
+        /* KARTALAR DIZAYNI (TILLA NEON YOG'DUSI BILAN) */
+        .container {
+            position: relative;
+            z-index: 10;
+            background: rgba(20, 20, 20, 0.72) !important;
+            border: 1px solid rgba(214, 175, 55, 0.2); /* Mayin oltin chegara */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 35px 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(214, 175, 55, 0.15); /* Tilla rangli Glow */
+            max-width: 400px;
+            width: 85%;
+            transition: all 0.5s ease;
+        }
+
+        .hidden { display: none !important; }
+        .heart-icon { font-size: 45px; margin-bottom: 15px; animation: heartbeat 1.2s infinite; }
+        h1 { color: #ffffff !important; font-size: 22px; font-weight: 400; line-height: 1.5; margin-bottom: 25px; }
+        p { font-size: 15px; color: #aaa; }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            height: 60px;
+            align-items: center;
+        }
+
+        /* TUGMALAR VA MIKRO-ANIMATSIYA */
+        button {
+            padding: 12px 24px;
+            font-size: 15px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.1s ease, background 0.3s;
+            touch-action: manipulation;
+        }
+
+        /* Bosilganda ichkariga botish effekti */
+        button:active {
+            transform: scale(0.92) !important;
+        }
+
+        #yes-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        #no-btn {
+            background-color: #333;
+            color: #aaa;
+            position: absolute;
+            right: 20px;
+        }
+
+        /* TANLOV KARTALARI ANIMATSIYASI */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 5px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .option-card:active {
+            transform: scale(0.95);
+        }
+
+        .option-card span { font-size: 26px; display: block; margin-bottom: 6px; }
+        .option-card p { color: #fff !important; margin: 0; font-size: 12px; }
+        .option-card:hover { transform: translateY(-3px); background: rgba(214, 175, 55, 0.15); border-color: #d4af37; }
+
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            font-size: 20px;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
+        }
+        .music-control:active { transform: scale(0.88); }
+
+        @keyframes heartbeat {
+            0%, 40%, 80%, 100% { transform: scale(1); }
+            20%, 60% { transform: scale(1.1); }
+        }
+
+        /* TELEFON MOSLASHUVI */
+        @media (max-width: 480px) {
+            .container { padding: 25px 15px; width: 88%; background: rgba(15, 15, 15, 0.85) !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(214, 175, 55, 0.12); }
+            h1 { font-size: 19px; margin-bottom: 20px; }
+            
+            .quote { 
+                font-size: 11px !important; 
+                white-space: normal !important; 
+                width: 75% !important; 
+                line-height: 1.5;
+                color: rgba(255, 255, 255, 0.28) !important;
+                animation: floatUp 40s infinite linear;
+            }
+            
+            .q1 { left: 6% !important; animation-delay: 0s !important; }
+            .q2 { left: 12% !important; animation-delay: 4s !important; }
+            .q3 { left: 4% !important; animation-delay: 8s !important; }
+            .q4 { left: 10% !important; animation-delay: 12s !important; }
+            .q5 { left: 7% !important; animation-delay: 16s !important; }
+            .q6 { left: 14% !important; animation-delay: 20s !important; }
+            .q7 { left: 5% !important; animation-delay: 24s !important; }
+            .q8 { left: 11% !important; animation-delay: 28s !important; }
+            .q9 { left: 3% !important; animation-delay: 32s !important; }
+            .q10 { left: 9% !important; animation-delay: 36s !important; }
+            .q11 { left: 5% !important; animation-delay: 40s !important; }
+            .q12 { left: 13% !important; animation-delay: 44s !important; }
+
+            .options-grid { grid-template-columns: 1fr; gap: 10px; }
+            .option-card { display: flex; align-items: center; justify-content: flex-start; padding: 10px 15px; gap: 15px; }
+            .option-card span { margin-bottom: 0; font-size: 22px; }
+            .option-card p { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MUSIQA ELEMENTI -->
+    <audio id="bg-music" loop src="music.mp3"></audio>
+    <div class="music-control" id="music-btn" onclick="toggleMusic()">🔇</div>
+
+    <!-- ORQA FONDAGI BARCHA IQTIBOSLAR VA NEON DEKORATSIYALAR -->
+    <div class="bg-quotes">
+        <span class="quote q1">Sengacha yillarim bu zerikarli yillar, seni izlab barchasi...</span>
+        <span class="floating-emoji e1">✨</span>
+        <span class="quote q2">Senda bor-yo'g'i bitta ishim bor. Meni bir umrlik tashvishim bo'l.</span>
+        <span class="quote q3">Menga sevishingni ayt, senga jonimni fido qilay.</span>
+        <span class="floating-emoji e2">💖</span>
+        <span class="quote q4">Hey, menga tuyg'ularingni yubor...</span>
+        <span class="quote q5">Uy qurayapman kelasan deb qachondir.</span>
+        <span class="floating-emoji e3">✨</span>
+        <span class="quote q6">O'tinaman qutqarma cho'ksam nigohingda...</span>
+        <span class="quote q7">Go'zallar ko'p, lekin bu ko'zlar alohida.</span>
+        <span class="floating-emoji e4">💖</span>
+        <span class="quote q8">Oshiqman faqat sen uchun dunyoga kelgan, ozoringga ko'nib sevgan...</span>
+        <span class="quote q9">Oshiqman seni hammadan qizg'onib sevgan 💖</span>
+        <span class="floating-emoji e5">✨</span>
+        <span class="quote q10">Endi hayotimda muhim o'rning bor. Har bir go'zal shaharlarni men bilan ko'rgin ming bor 🗺️✨</span>
+        <span class="quote q11">Sen faqat kulishing uchun, bir bora kulishing uchun borimni beray...</span>
+        <span class="floating-emoji e6">✨</span>
+        <span class="quote q12">Faqat so'ramagin mahrga gelik, shundog'am bo'lasan eng baxtli kelin 💍. Otabekning kumushiday sev. Kerak emas shahlo ko'zlaring, sumbul sochlaring. Qalbim uchun kifoya sening shirin so'zlaring. ✨</span>
+    </div>
+
+    <!-- 1-Sahifa -->
+    <div class="container" id="main-card">
+        <div class="heart-icon">💖</div>
+        <h1>Salom, men bugun sizni uchrashuvga taklif qilmoqchiman. Men bilan bir kuningizni o'tqazasizmi? ☕✨</h1>
+        
+        <div class="buttons">
+            <button id="yes-btn">Ha, albatta! 😍</button>
+            <button id="no-btn">Yo'q 😢</button>
+        </div>
+    </div>
+
+    <!-- 2-Sahifa -->
+    <div class="container hidden" id="details-card">
+        <div class="heart-icon">🎉</div>
+        <h1 id="stage-title">Uraaa! Kelishdik! 😍</h1>
+        <p id="stage-subtitle">Uchrashuvni qayerda o'tkazamiz? Tanlang:</p>
+        
+        <div class="options-grid" id="location-options">
+            <div class="option-card" onclick="selectLocation('Parkda sayr 🌳✨')">
+                <span>🌳✨</span>
+                <p>Parkda sayr</p>
+            </div>
+            <div class="option-card" onclick="selectLocation('Restoranga borish 🍽️🥂')">
+                <span>🍽️🥂</span>
+                <p>Restoranga borish</p>
+            </div>
+            <div class="option-card" onclick="selectLocation('Kinoga borish 🎬🍿')">
+                <span>🎬🍿</span>
+                <p>Kinoga borish</p>
+            </div>
+        </div>
+
+        <div class="options-grid hidden" id="day-options">
+            <div class="option-card" onclick="selectDay('Shanba')">
+                <span>📅</span>
+                <p>Shanba kuni</p>
+            </div>
+            <div class="option-card" onclick="selectDay('Yakshanba')">
+                <span>📅</span>
+                <p>Yakshanba kuni</p>
+            </div>
+        </div>
+
+        <div class="options-grid hidden" id="time-options">
+            <div class="option-card" onclick="selectTime('16:00')">
+                <span>🕒</span>
+                <p>16:00 da</p>
+            </div>
+            <div class="option-card" onclick="selectTime('17:00')">
+                <span>🕓</span>
+                <p>17:00 da</p>
+            </div>
+            <div class="option-card" onclick="selectTime('18:00')">
+                <span>🕔</span>
+                <p>18:00 da</p>
+            </div>
+        </div>
+
+        <h3 id="final-message" style="color: #d4af37; margin-top: 25px; min-height: 30px; line-height: 1.6;"></h3>
+    </div>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicBtn.innerHTML = "🔊";
+            } else {
+                music.pause();
+                musicBtn.innerHTML = "🔇";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+            const mainCard = document.getElementById('main-card');
+            const detailsCard = document.getElementById('details-card');
+
+            document.body.addEventListener('click', function() {
+                if(music.paused && musicBtn.innerHTML !== "🔇") {
+                    music.play().then(() => {
+                        musicBtn.innerHTML = "🔊";
+                    }).catch(err => console.log("Avtomatik ijro to'sildi"));
+                }
+            }, { once: true });
+
+            function qochibKet() {
+                if (window.matchMedia("(max-width: 480px)").matches) return;
+                const padding = 150; 
+                const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+                const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+                let randomX = Math.floor(Math.random() * maxX);
+                let randomY = Math.floor(Math.random() * maxY);
+                if (randomX < padding) randomX = padding;
+                if (randomY < padding) randomY = padding;
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+            }
+
+            if(noBtn) {
+                noBtn.addEventListener('mouseenter', qochibKet);
+                noBtn.addEventListener('click', function(e) {
+                    if (window.matchMedia("(max-width: 480px)").matches) {
+                        alert("Baribir yo'q deya olmaysiz! 😉 Haqiqiy tanlovni bosing.");
+                    } else {
+                        qochibKet();
+                    }
+                });
+            }
+
+            if(yesBtn) {
+                yesBtn.addEventListener('click', function() {
+                    music.play().then(() => {
+                        musicBtn.innerHTML = "🔊";
+                    }).catch(e => console.log(e));
+
+                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+                    mainCard.classList.add('hidden');
+                    detailsCard.classList.remove('hidden');
+                });
+            }
+        });
+
+        let uchrashuvData = { lokatsiya: '', kun: '', vaqt: '' };
+
+        function selectLocation(loc) {
+            uchrashuvData.lokatsiya = loc;
+            document.getElementById('location-options').classList.add('hidden');
+            document.getElementById('stage-title').innerHTML = "Ajoyib lokatsiya! 👌";
+            document.getElementById('stage-subtitle').innerHTML = "Endi esa qaysi kuni uchrashishimiz qulay? Tanlang:";
+            document.getElementById('day-options').classList.remove('hidden');
+            confetti({ particleCount: 40, spread:Spread = 40, origin: { y: 0.7 } });
         }
 
         function selectDay(day) {
