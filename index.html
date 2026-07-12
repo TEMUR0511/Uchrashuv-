@@ -33,26 +33,30 @@
             pointer-events: none;
         }
 
-        /* Kompyuter uchun iqtiboslar */
         .quote {
             position: absolute;
             color: rgba(255, 255, 255, 0.23);
             font-size: 15px;
             font-style: italic;
             white-space: nowrap;
-            animation: floatUp 32s infinite linear; /* Yozuvlar uzunligi uchun tezlikni yanada sekinlashtirdik */
+            animation: floatUp 35s infinite linear; /* Sekin qalqib chiqish tezligi */
             bottom: -180px;
             opacity: 0;
         }
 
-        /* Iqtiboslarning chiqish vaqti va joylashuvi */
+        /* 12 ta iqtibos uchun ekranda chiqish vaqtlari */
         .q1 { left: 5%; animation-delay: 0s; color: rgba(214, 175, 55, 0.3); }
-        .q2 { left: 12%; animation-delay: 4.5s; }
-        .q3 { left: 8%; animation-delay: 9s; }
-        .q4 { left: 2%; animation-delay: 13.5s; color: rgba(214, 175, 55, 0.25); }
-        .q5 { left: 15%; animation-delay: 18s; }
-        .q6 { left: 5%; animation-delay: 22.5s; }
-        .q7 { left: 10%; animation-delay: 27s; }
+        .q2 { left: 15%; animation-delay: 3s; }
+        .q3 { left: 8%; animation-delay: 6s; }
+        .q4 { left: 25%; animation-delay: 9s; }
+        .q5 { left: 35%; animation-delay: 12s; color: rgba(214, 175, 55, 0.25); }
+        .q6 { left: 12%; animation-delay: 15s; }
+        .q7 { left: 2%; animation-delay: 18s; }
+        .q8 { left: 18%; animation-delay: 21s; }
+        .q9 { left: 6%; animation-delay: 24s; }
+        .q10 { left: 30%; animation-delay: 27s; }
+        .q11 { left: 10%; animation-delay: 30s; }
+        .q12 { left: 40%; animation-delay: 33s; }
 
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 0; }
@@ -136,7 +140,6 @@
         .option-card p { color: #fff !important; margin: 0; font-size: 12px; }
         .option-card:hover { transform: translateY(-5px); background: rgba(214, 175, 55, 0.15); border-color: #d4af37; }
 
-        /* MUSIQA TUGMASI DIZAYNI */
         .music-control {
             position: fixed;
             top: 20px;
@@ -163,7 +166,7 @@
             20%, 60% { transform: scale(1.1); }
         }
 
-        /* TELEFONLAR UCHUN MAXSUS MOSLASHUV */
+        /* TELEFON MOSLASHUVI */
         @media (max-width: 480px) {
             .container { padding: 25px 15px; width: 88%; background: rgba(15, 15, 15, 0.85) !important; }
             h1 { font-size: 19px; margin-bottom: 20px; }
@@ -171,19 +174,24 @@
             .quote { 
                 font-size: 11px !important; 
                 white-space: normal !important; 
-                width: 80% !important; 
+                width: 75% !important; 
                 line-height: 1.5;
                 color: rgba(255, 255, 255, 0.28) !important;
-                animation: floatUp 36s infinite linear; /* Telefonda uzun yozuvlar juda mayin ko'tariladi */
+                animation: floatUp 40s infinite linear; /* Telefonda uzun matnlar yanada sekin chiqadi */
             }
             
             .q1 { left: 6% !important; animation-delay: 0s !important; }
-            .q2 { left: 10% !important; animation-delay: 5s !important; }
-            .q3 { left: 5% !important; animation-delay: 10s !important; }
-            .q4 { left: 8% !important; animation-delay: 15s !important; }
-            .q5 { left: 12% !important; animation-delay: 20s !important; }
-            .q6 { left: 4% !important; animation-delay: 25s !important; }
-            .q7 { left: 9% !important; animation-delay: 30s !important; }
+            .q2 { left: 12% !important; animation-delay: 4s !important; }
+            .q3 { left: 4% !important; animation-delay: 8s !important; }
+            .q4 { left: 10% !important; animation-delay: 12s !important; }
+            .q5 { left: 7% !important; animation-delay: 16s !important; }
+            .q6 { left: 14% !important; animation-delay: 20s !important; }
+            .q7 { left: 5% !important; animation-delay: 24s !important; }
+            .q8 { left: 11% !important; animation-delay: 28s !important; }
+            .q9 { left: 3% !important; animation-delay: 32s !important; }
+            .q10 { left: 9% !important; animation-delay: 36s !important; }
+            .q11 { left: 5% !important; animation-delay: 40s !important; }
+            .q12 { left: 13% !important; animation-delay: 44s !important; }
 
             .options-grid { grid-template-columns: 1fr; gap: 10px; }
             .option-card { display: flex; align-items: center; justify-content: flex-start; padding: 10px 15px; gap: 15px; }
@@ -198,15 +206,23 @@
     <audio id="bg-music" loop src="music.mp3"></audio>
     <div class="music-control" id="music-btn" onclick="toggleMusic()">🔇</div>
 
-    <!-- ORQA FONDAGI YANGI ROMANTIK IQTIBOSLAR -->
+    <!-- ORQA FONDAGI BARCHA IQTIBOSLAR (TO'LIQ VA BIRLASHTIRILGAN) -->
     <div class="bg-quotes">
-        <span class="quote q1">Oshiqman faqat sen uchun dunyoga kelgan, ozoringga ko'nib sevgan...</span>
-        <span class="quote q2">Oshiqman seni hammadan qizg'onib sevgan 💖</span>
-        <span class="quote q3">Endi hayotimda muhim o'rning bor. Har bir go'zal shaharlarni men bilan ko'rgin ming bor 🗺️✨</span>
-        <span class="quote q4">Sen faqat kulishing uchun, bir bora kulishing uchun borimni beray...</span>
-        <span class="quote q5">Faqat so'ramagin mahrga gelik, shundog'am bo'lasan eng baxtli kelin 💍</span>
-        <span class="quote q6">Otabekning kumushiday sev... 📜</span>
-        <span class="quote q7">Kerak emas shahlo ko'zlaring, sumbul sochlaring. Qalbim uchun kifoya sening shirin so'zlaring. ✨</span>
+        <!-- Birinchi yozilgan iqtiboslar -->
+        <span class="quote q1">Sengacha yillarim bu zerikarli yillar, seni izlab barchasi...</span>
+        <span class="quote q2">Senda bor-yo'g'i bitta ishim bor. Meni bir umrlik tashvishim bo'l.</span>
+        <span class="quote q3">Menga sevishingni ayt, senga jonimni fido qilay.</span>
+        <span class="quote q4">Hey, menga tuyg'ularingni yubor...</span>
+        <span class="quote q5">Uy qurayapman kelasan deb qachondir.</span>
+        <span class="quote q6">O'tinaman qutqarma cho'ksam nigohingda...</span>
+        <span class="quote q7">Go'zallar ko'p, lekin bu ko'zlar alohida.</span>
+        
+        <!-- Keyingi qo'shilgan daxshat iqtiboslar -->
+        <span class="quote q8">Oshiqman faqat sen uchun dunyoga kelgan, ozoringga ko'nib sevgan...</span>
+        <span class="quote q9">Oshiqman seni hammadan qizg'onib sevgan 💖</span>
+        <span class="quote q10">Endi hayotimda muhim o'rning bor. Har bir go'zal shaharlarni men bilan ko'rgin ming bor 🗺️✨</span>
+        <span class="quote q11">Sen faqat kulishing uchun, bir bora kulishing uchun borimni beray...</span>
+        <span class="quote q12">Faqat so'ramagin mahrga gelik, shundog'am bo'lasan eng baxtli kelin 💍. Otabekning kumushiday sev. Kerak emas shahlo ko'zlaring, sumbul sochlaring. Qalbim uchun kifoya sening shirin so'zlaring. ✨</span>
     </div>
 
     <!-- 1-Sahifa -->
@@ -338,6 +354,7 @@
 
         let uchrashuvData = { lokatsiya: '', kun: '', vaqt: '' };
 
+        // Bosqichlar logikasi
         function selectLocation(loc) {
             uchrashuvData.lokatsiya = loc;
             document.getElementById('location-options').classList.add('hidden');
