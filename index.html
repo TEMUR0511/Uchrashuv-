@@ -6,7 +6,6 @@
     <title>Maxsus Taklif ✨</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
-    <!-- DIZAYN KODLARI SHU YERDA — ENDI OPPOQ FON BO'LISHI CHANS YO'Q -->
     <style>
         body {
             margin: 0;
@@ -39,23 +38,24 @@
             font-size: 16px;
             font-style: italic;
             white-space: nowrap;
-            animation: floatUp 20s infinite linear;
-            bottom: -100px;
+            animation: floatUp 28s infinite linear;
+            bottom: -150px;
+            opacity: 0;
         }
 
         .q1 { left: 5%; animation-delay: 0s; font-size: 18px; color: rgba(214, 175, 55, 0.3); }
-        .q2 { left: 15%; animation-delay: 3s; }
-        .q3 { left: 30%; animation-delay: 6s; }
-        .q4 { left: 50%; animation-delay: 9s; color: rgba(214, 175, 55, 0.25); }
-        .q5 { left: 65%; animation-duration: 22s; animation-delay: 12s; }
-        .q6 { left: 10%; animation-duration: 18s; animation-delay: 15s; }
-        .q7 { left: 40%; animation-duration: 25s; animation-delay: 2s; }
+        .q2 { left: 15%; animation-delay: 4s; }
+        .q3 { left: 35%; animation-delay: 8s; }
+        .q4 { left: 55%; animation-delay: 12s; color: rgba(214, 175, 55, 0.25); }
+        .q5 { left: 20%; animation-delay: 16s; }
+        .q6 { left: 10%; animation-delay: 20s; }
+        .q7 { left: 45%; animation-delay: 24s; }
 
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(-120vh); opacity: 0; }
+            100% { transform: translateY(-130vh); opacity: 0; }
         }
 
         .container {
@@ -132,42 +132,78 @@
         .option-card p { color: #fff !important; margin: 0; font-size: 12px; }
         .option-card:hover { transform: translateY(-5px); background: rgba(214, 175, 55, 0.15); border-color: #d4af37; }
 
-       
-        @media (max-width: 480px) 
-    .container { padding: 25px 15px; width: 88%; background: rgba(15, 15, 15, 0.85) !important; }
-    h1 { font-size: 19px; margin-bottom: 20px; }
-        .quote {
-    font-size: 11px !important;
-    white-space: normal !important;
-    width: 80% !important;
-    line-height: 1.3;
-    color: rgba(255, 255, 255, 0.35);
-}
-    .q1 { left: 5% !important; animation-delay: 0s !important; }
-    .q2 { left: 10% !important; animation-delay: 4s !important; }
-    .q3 { left: 15% !important; animation-delay: 8s !important; }
-    .q4 { left: 5% !important; animation-delay: 12s !important; }
-    .q5 { left: 12% !important; animation-delay: 16s !important; }
-    .q6 { left: 8% !important; animation-delay: 20s !important; }
-    .q7 { left: 14% !important; animation-delay: 2s !important; }
+        /* MUSIQA TUGMASI DIZAYNI */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            font-size: 20px;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+
         @keyframes heartbeat {
             0%, 40%, 80%, 100% { transform: scale(1); }
             20%, 60% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 25px 15px; width: 88%; background: rgba(15, 15, 15, 0.85) !important; }
+            h1 { font-size: 19px; margin-bottom: 20px; }
+            
+            .quote { 
+                font-size: 11px !important; 
+                white-space: normal !important; 
+                width: 75% !important; 
+                line-height: 1.4;
+                color: rgba(255, 255, 255, 0.3) !important;
+                animation: floatUp 32s infinite linear;
+            }
+            
+            .q1 { left: 8% !important; animation-delay: 0s !important; }
+            .q2 { left: 12% !important; animation-delay: 5s !important; }
+            .q3 { left: 6% !important; animation-delay: 10s !important; }
+            .q4 { left: 15% !important; animation-delay: 15s !important; }
+            .q5 { left: 10% !important; animation-delay: 20s !important; }
+            .q6 { left: 5% !important; animation-delay: 25s !important; }
+            .q7 { left: 14% !important; animation-delay: 30s !important; }
+
+            .options-grid { grid-template-columns: 1fr; gap: 10px; }
+            .option-card { display: flex; align-items: center; justify-content: flex-start; padding: 10px 15px; gap: 15px; }
+            .option-card span { margin-bottom: 0; font-size: 22px; }
+            .option-card p { font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- MUSIQA ELEMENTI -->
+    <audio id="bg-music" loop src="music.mp3"></audio>
+    <div class="music-control" id="music-btn" onclick="toggleMusic()">🔇</div>
+
     <div class="bg-quotes">
-        <span class="quote q1">Sengacha yillarim bu zerikarli yillar, seni izlab barchasi...</span>
-        <span class="quote q2">Senda bor-yo'g'i bitta ishim bor. Meni bir umrlik tashvishim bo'l.</span>
-        <span class="quote q3">Menga sevishingni ayt, senga jonimni fido qilay.</span>
-        <span class="quote q4">Hey, menga tuyg'ularingni yubor...</span>
-        <span class="quote q5">Uy qurayapman kelasan deb qachondir.</span>
-        <span class="quote q6">O'tinaman qutqarma cho'ksam nigohingda...</span>
-        <span class="quote q7">Go'zallar ko'p, lekin bu ko'zlar alohida.</span>
+        <span class="quote q1">Sengacha yillarim bu zerikarli yillar, seni izlab barchasi seni izlab</span>
+        <span class="quote q2">Senda bor yo'g'i bitta ishim bor. Meni bir umrlik tashvishim bo'l</span>
+        <span class="quote q3">Menga sevishingni ayt senga jonimni fido qilay</span>
+        <span class="quote q4">Hey menga tuyg'ularingni yubor</span>
+        <span class="quote q5">Uy qurayapman kelasan deb qachondir</span>
+        <span class="quote q6">O'tinaman qutqarma cho'ksam nigohingda.</span>
+        <span class="quote q7">Go'zallar ko'p lekin bu ko'zlar alohida</span>
     </div>
 
+    <!-- 1-Sahifa -->
     <div class="container" id="main-card">
         <div class="heart-icon">💖</div>
         <h1>Salom, men bugun sizni uchrashuvga taklif qilmoqchiman. Men bilan bir kuningizni o'tqazasizmi? ☕✨</h1>
@@ -178,6 +214,7 @@
         </div>
     </div>
 
+    <!-- 2-Sahifa -->
     <div class="container hidden" id="details-card">
         <div class="heart-icon">🎉</div>
         <h1 id="stage-title">Uraaa! Kelishdik! 😍</h1>
@@ -228,11 +265,34 @@
     </div>
 
     <script>
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-btn');
+
+        // Musiqani yoqish/o'chirish boshqaruvi
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicBtn.innerHTML = "🔊";
+            } else {
+                music.pause();
+                musicBtn.innerHTML = "🔇";
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const noBtn = document.getElementById('no-btn');
             const yesBtn = document.getElementById('yes-btn');
             const mainCard = document.getElementById('main-card');
             const detailsCard = document.getElementById('details-card');
+
+            // Ekrandagi istalgan birinchi bosishda musiqani fonda boshlashga urinish
+            document.body.addEventListener('click', function() {
+                if(music.paused && musicBtn.innerHTML !== "🔇") {
+                    music.play().then(() => {
+                        musicBtn.innerHTML = "🔊";
+                    }).catch(err => console.log("Avtomatik ijro to'sildi"));
+                }
+            }, { once: true });
 
             function qochibKet() {
                 if (window.matchMedia("(max-width: 480px)").matches) return;
@@ -261,6 +321,11 @@
 
             if(yesBtn) {
                 yesBtn.addEventListener('click', function() {
+                    // "Ha" bosilganda aniq ashula chalinadi
+                    music.play().then(() => {
+                        musicBtn.innerHTML = "🔊";
+                    }).catch(e => console.log(e));
+
                     confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
                     mainCard.classList.add('hidden');
                     detailsCard.classList.remove('hidden');
@@ -297,7 +362,7 @@
             document.getElementById('final-message').innerHTML = `
                 📍 Joy: <strong>${uchrashuvData.lokatsiya}</strong><br>
                 📅 Kun: <strong>${uchrashuvData.kun} kuni</strong><br>
-                🕒 Vaqt: <strong>Soat ${uchrashuvData.vaqt} da</strong><br><br>
+                🕒 Vaqt: <strong>Soat ${uchrashuvData.vaqt || time} da</strong><br><br>
                 Tez orada ko'rishguncha! 😉
             `;
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
